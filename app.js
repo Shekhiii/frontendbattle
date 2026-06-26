@@ -102,14 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeFaqAccordion();
 });
 
-/**
- * Three.js Premium Hero Visual Configuration Suite
- */
+
+ 
 function initThreeJSEngine() {
   const container = document.querySelector('.hero-visual');
   if (!container) return;
 
-  // 1. Setup Scene, Camera, and WebGL Renderer
+
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     60, 
@@ -123,24 +122,24 @@ function initThreeJSEngine() {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   
-  // Wipe out pure CSS background graphic fallback placeholder once ThreeJS mounts
+
   const placeholder = container.querySelector('.visual-matrix-mesh');
   if (placeholder) placeholder.style.background = 'none';
   
   container.appendChild(renderer.domElement);
 
-  // 2. Build High-Fidelity Particle Sphere Geometry
+
   const particleCount = 450;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
 
   for (let i = 0; i < particleCount * 3; i += 3) {
-    // Math formulas to distribute points uniformly across a spherical volume
+   
     const u = Math.random();
     const v = Math.random();
     const theta = u * 2.0 * Math.PI;
     const phi = Math.acos(2.0 * v - 1.0);
-    const r = 1.15; // Radius matches container boundaries nicely
+    const r = 1.15; 
 
     positions[i] = r * Math.sin(phi) * Math.cos(theta);
     positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
@@ -149,7 +148,7 @@ function initThreeJSEngine() {
 
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-  // 3. Define Material Properties using asset color constraints (#FF9932 Saffron)
+ 
   const material = new THREE.PointsMaterial({
     color: 0xFF9932,
     size: 0.015,
@@ -161,7 +160,7 @@ function initThreeJSEngine() {
   const particleSystem = new THREE.Points(geometry, material);
   scene.add(particleSystem);
 
-  // 4. Hardware-Accelerated Animation Loop Control
+
   function renderFrameTick() {
     requestAnimationFrame(renderFrameTick);
     
@@ -173,7 +172,6 @@ function initThreeJSEngine() {
   }
   renderFrameTick();
 
-  // 5. Dynamic Responsive Resize Linkage
   window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
@@ -181,10 +179,8 @@ function initThreeJSEngine() {
   });
 }
 
-// Make sure to kick off the function inside your existing DOMContentLoaded listener!
+
 document.addEventListener('DOMContentLoaded', () => {
-  // ... your pricing and bento initialization code ...
-  
-  // Run the 3D generation matrix
+
   initThreeJSEngine();
 });
